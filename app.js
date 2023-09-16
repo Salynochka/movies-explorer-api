@@ -10,7 +10,6 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const routes = require('./routes/index');
 const errorHandler = require('./middlewares/error-handler');
 
-const express = require('express');
 // Слушаем 3000 порт
 const { PORT = 3000, filmBd = 'mongodb://localhost:27017/bitfilmsdb'} = process.env;
 
