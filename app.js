@@ -11,7 +11,7 @@ const routes = require('./routes/index');
 const errorHandler = require('./middlewares/error-handler');
 
 // Слушаем 3000 порт
-const { PORT = 3000, filmBd = 'mongodb://localhost:27017/bitfilmsdb'} = process.env;
+const { PORT = 3000, filmBd = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
 
 const app = express();
 
