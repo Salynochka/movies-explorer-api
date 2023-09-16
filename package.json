@@ -1,0 +1,25 @@
+{
+  "name": "movies-explorer-api",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "dev": "node app.js",
+    "lint": "npx eslint ."
+  },
+  "author": "Alena Salikhova",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-winston": "^4.2.0",
+    "mongoose": "^7.5.1",
+    "validator": "^13.11.0",
+    "winston": "^3.10.0"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
