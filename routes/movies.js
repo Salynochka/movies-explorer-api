@@ -3,9 +3,7 @@ const {
   getFilms, createFilm, deleteFilm,
 } = require('../controllers/users');
 
-/* const {
-  validateFilm
-} = require('../middlewares/validate'); */
+const { validateFilm } = require('../middlewares/validateFilm');
 
 router.get('/', validateFilm, getFilms);
 router.post('/', validateFilm, createFilm);

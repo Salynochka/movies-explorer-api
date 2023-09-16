@@ -13,7 +13,7 @@ module.exports.validateRegister = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
+    password: Joi.string().required().min(8).password(),
   }),
 });
 
@@ -32,13 +32,16 @@ module.exports.validateUserId = celebrate({
 
 module.exports.validateFilm = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    link: Joi.string().required().pattern(patternOfLink),
+    country: Joi.string().required(),
+    director: Joi.number().required(),
+    duration: Joi.string().required(),
+    year: Joi.string().required(),
+    image: Joi.string().required().link(),
+    trailerLink: Joi.string().required().pattern(patternOfLink),
+    thumbnail: Joi.string().required().pattern(patternOfLink),
+    owner: Joi.string().length(24).hex().required(),
+    movieId: Joi.string().length(24).hex().required(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }),
 });
-/*
-module.exports.validateFilmId = celebrate({
-  params: Joi.object().keys({
-    cardId: Joi.string().length(24).hex().required(),
-  }),
-}); */
