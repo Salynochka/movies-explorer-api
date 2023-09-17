@@ -1,9 +1,13 @@
+// импорт роута
 const router = require('express').Router();
+
+// импорт контроллеров
 const {
   getFilms, createFilm, deleteFilm,
-} = require('../controllers/users');
+} = require('../controllers/movies');
 
-const { validateFilm } = require('../middlewares/validateFilm');
+// импорт валидации
+const { validateFilm } = require('../middlewares/validate');
 
 router.get('/', validateFilm, getFilms);
 router.post('/', validateFilm, createFilm);
