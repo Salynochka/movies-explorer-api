@@ -13,7 +13,7 @@ module.exports.validateRegister = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(8).password(),
+    password: Joi.string().required().min(8),
   }),
 });
 
@@ -36,7 +36,7 @@ module.exports.validateFilm = celebrate({
     director: Joi.number().required(),
     duration: Joi.string().required(),
     year: Joi.string().required(),
-    image: Joi.string().required().link(),
+    image: Joi.string().required(),
     trailerLink: Joi.string().required().pattern(patternOfLink),
     thumbnail: Joi.string().required().pattern(patternOfLink),
     owner: Joi.string().length(24).hex().required(),
