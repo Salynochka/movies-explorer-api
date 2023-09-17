@@ -17,8 +17,8 @@ const errorHandler = require('./middlewares/error-handler');
 // импорт роута
 const routes = require('./routes/index');
 
-// слушаем 3000 порт и ссылку на БД
-const { PORT = 3000, filmBd = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
+// слушаем 3001 порт и ссылку на БД
+const { PORT = 3001, filmBd = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
 
 // приложение на express
 const app = express();
