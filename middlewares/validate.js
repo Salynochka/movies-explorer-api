@@ -33,8 +33,8 @@ module.exports.validateUserId = celebrate({
 module.exports.validateFilm = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
-    director: Joi.number().required(),
-    duration: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.number().required(),
     year: Joi.string().required(),
     image: Joi.string().required(),
     trailerLink: Joi.string().required().pattern(patternOfLink),
