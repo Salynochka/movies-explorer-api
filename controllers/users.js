@@ -24,7 +24,7 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.register = (req, res, next) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
 
   if (!email || !password) {
     next(new IncorrectDataError('Email или пароль не могут быть пустыми '));
@@ -32,8 +32,8 @@ module.exports.register = (req, res, next) => {
 
   bcrypt.hash(req.body.password, 10) // записываем данные в базу
     .then((hash) => User.create({
-      name: req.body.name,
-      email: req.body.email,
+      name,
+      email,
       password: hash,
     }))
     .then((user) => {
