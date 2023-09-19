@@ -5,14 +5,14 @@ const NotFoundError = require('../errors/not-found-error');
 const IncorrectDataError = require('../errors/incorrect-data-error');
 const AlreayExistError = require('../errors/already-exist-error');
 
-const { SECRET_KEY = 'SomeSecretKey123&' } = process.env;
+const { NODE_ENV, SECRET_DEV = 'SomeSecretKey123&', SECRET_KEY } = process.env;
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, SECRET_KEY, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV !== 'production' ? SECRET_DEV : SECRET_KEY, { expiresIn: '7d' });
       res.cookie('token', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,

@@ -6,9 +6,9 @@ const NotAuthError = require('../errors/not-auth-error');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    minlength: 2,
-    maxlength: 30,
-    required: true,
+    minlength: [2, 'длина имени пользователя должна быть не менее 2 символов'],
+    maxlength: [2, 'длина имени пользователя должна быть не более 30 символов'],
+    required: [true, 'имя пользователя - обязательное поле'],
   },
   email: {
     type: String,
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
       message: 'Введите корректный email',
     },
     unique: true,
-    required: true,
+    required: [true, 'email - обязательное поле'],
   },
   password: {
     type: String,
@@ -25,10 +25,11 @@ const userSchema = new mongoose.Schema({
       validator: (password) => validator.isPassword(password),
       message: 'Минимальная длина пароля - 8 знаков',
     },
-    required: true,
+    required: [true, 'password - обязательное поле'],
     select: false,
     hash: true,
   },
+  versionKey: false,
 });
 
 userSchema.statics.findUserByCredentials = function findUserByCredentials(email, password) {
