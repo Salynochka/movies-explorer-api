@@ -9,8 +9,9 @@ const {
 // импорт валидации
 const { validateFilm } = require('../middlewares/validate');
 
+// роуты
 router.get('/', validateFilm, getFilms);
 router.post('/', validateFilm, createFilm);
-router.delete('/_id', validateFilm, deleteFilm);
+router.delete('/:_id', validateFilm, deleteFilm);
 
 module.exports = router;

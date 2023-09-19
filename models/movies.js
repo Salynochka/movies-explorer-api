@@ -4,61 +4,61 @@ const validator = require('validator');
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    required: true,
+    required: [true, 'страна создания фильма - обязательное поле'],
   },
   director: {
     type: String,
-    required: true,
+    required: [true, 'режессёр фильма - обязательное поле'],
   },
   duration: {
     type: Number,
-    required: true,
+    required: [true, 'длительность фильма - обязательное поле'],
   },
   year: {
     type: String,
-    required: true,
+    required: [true, 'год создания фильма - обязательное поле'],
   },
   image: {
     type: String,
-    required: true,
+    required: [true, 'постер к фильму - обязательное поле'],
     validate: {
       validator: (url) => validator.isURL(url),
-      message: 'Введите URL',
+      message: 'Некорректно переданный URL',
     },
   },
   trailerLink: {
     type: String,
-    required: true,
+    required: [true, 'трейлер фильма - обязательное поле'],
     validate: {
       validator: (url) => validator.isURL(url),
-      message: 'Введите URL',
+      message: 'Некорректно переданный URL',
     },
   },
   thumbnail: {
     type: String,
-    required: true,
+    required: [true, 'миниатюрное изображение постера фильма - обязательное поле'],
     validate: {
       validator: (url) => validator.isURL(url),
-      message: 'Введите URL',
+      message: 'Некорректно переданный URL',
     },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
+    required: [true, 'не передан id пользователя'],
     ref: 'user',
   },
   movieId: {
-    type: mongoose.Schema.Types.ObjectId, // NUMBER (должен быть)
-    required: true,
+    type: Number,
+    required: [true, 'не передан id фильма'],
     ref: 'movie',
   },
   nameRU: {
     type: String,
-    required: true,
+    required: [true, 'название фильма на русском языке - обязательное поле'],
   },
   nameEN: {
     type: String,
-    required: true,
+    required: [true, 'название фильма на английском языке - обязательное поле'],
   },
 });
 
