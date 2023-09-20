@@ -72,19 +72,18 @@ module.exports.updateUser = (req, res, next) => {
   const userId = req.user._id;
 
   User.findByIdAndUpdate(userId, { name, email }, { new: true, runValidators: true })
+    .orFail(NotFoundError('Запрашиваемый пользователь не найден'))
     .then((user) => {
-      if (user) {
-        res.send(user);
-        return;
-      }
-      throw new NotFoundError('Запрашиваемый пользователь не найден');
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new IncorrectDataError('Произошла ошибка'));
-        return;
+      } else if (err.name === 'CastError') {
+        next(new IncorrectDataError('Произошла ошибка'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 

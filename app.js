@@ -11,6 +11,7 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const limiter = require('./middlewares/limiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error-handler');
 
@@ -18,7 +19,7 @@ const errorHandler = require('./middlewares/error-handler');
 const routes = require('./routes/index');
 
 // слушаем 3001 порт и ссылку на БД
-const { PORT = 3001, filmBd = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
+const { PORT = 3001, filmBd } = process.env;
 
 // приложение на express
 const app = express();
@@ -36,6 +37,7 @@ app.use(cors({
 
 // безопасность
 app.use(helmet());
+app.use(limiter);
 
 // middlewares
 app.use(bodyParser.json());

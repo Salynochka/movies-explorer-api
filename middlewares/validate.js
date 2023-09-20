@@ -40,8 +40,14 @@ module.exports.validateFilm = celebrate({
     trailerLink: Joi.string().required().pattern(patternOfLink),
     thumbnail: Joi.string().required().pattern(patternOfLink),
     owner: Joi.string().length(24).hex().required(),
-    movieId: Joi.string().length(24).hex().required(),
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
+  }),
+});
+
+module.exports.validateFilmId = celebrate({
+  params: Joi.object().keys({
+    movieId: Joi.number().required(),
   }),
 });

@@ -7,11 +7,11 @@ const {
 } = require('../controllers/movies');
 
 // импорт валидации
-const { validateFilm } = require('../middlewares/validate');
+const { validateFilm, validateFilmId } = require('../middlewares/validate');
 
 // роуты
-router.get('/', validateFilm, getFilms);
+router.get('/', getFilms);
 router.post('/', validateFilm, createFilm);
-router.delete('/:_id', validateFilm, deleteFilm);
+router.delete('/:_id', validateFilmId, deleteFilm);
 
 module.exports = router;
