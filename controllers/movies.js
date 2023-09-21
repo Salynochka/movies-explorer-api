@@ -4,7 +4,9 @@ const IncorrectDataError = require('../errors/incorrect-data-error');
 const ForbiddenError = require('../errors/forbidden-error');
 
 module.exports.getFilms = (req, res, next) => {
-  Movie.find()
+  const { _id } = req.user;
+
+  Movie.find({ owner: _id })
     .then((movies) => res.send(movies))
     .catch(next);
 };
