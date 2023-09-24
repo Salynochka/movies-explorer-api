@@ -24,22 +24,15 @@ module.exports.validateUpdateUser = celebrate({
   }),
 });
 
-module.exports.validateUserId = celebrate({
-  params: Joi.object().keys({
-    userId: Joi.string().length(24).hex().required(),
-  }),
-});
-
 module.exports.validateFilm = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.string().required(),
-    image: Joi.string().required(),
+    image: Joi.string().required().pattern(patternOfLink),
     trailerLink: Joi.string().required().pattern(patternOfLink),
     thumbnail: Joi.string().required().pattern(patternOfLink),
-    owner: Joi.string().length(24).hex().required(),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
