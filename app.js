@@ -11,6 +11,7 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const limiter = require('./middlewares/limiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error-handler');
 
@@ -18,24 +19,30 @@ const errorHandler = require('./middlewares/error-handler');
 const routes = require('./routes/index');
 
 // слушаем 3001 порт и ссылку на БД
-const { PORT = 3001, filmBd = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
+const { PORT = 3000, bitfilmsdb } = process.env;
 
 // приложение на express
 const app = express();
 
 // подключение к БД
-mongoose.connect(filmBd, {
+mongoose.connect(bitfilmsdb, {
   useNewUrlParser: true,
 });
 
+const allowedCors = [
+  'https://movies.weekend.nomoredomainsrocks.ru',
+  'localhost:3000',
+];
+
 // подключение допуска запросов с фронта
 app.use(cors({
-  origin: 'https://movies.weekend.nomoredomainsrocks.ru',
+  origin: allowedCors, // 'https://movies.weekend.nomoredomainsrocks.ru',
   credentials: true,
 }));
 
 // безопасность
 app.use(helmet());
+app.use(limiter);
 
 // middlewares
 app.use(bodyParser.json());
@@ -55,4 +62,8 @@ app.use(errors());
 // централизованная обработка ошибок
 app.use(errorHandler);
 
-app.listen(PORT);
+// app.listen(PORT);
+
+app.listen(() => {
+  console.log(`Слушаю ${PORT}`);
+});

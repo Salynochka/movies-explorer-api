@@ -11,7 +11,7 @@ module.exports.validateLogin = celebrate({
 
 module.exports.validateRegister = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
   }),
@@ -19,14 +19,8 @@ module.exports.validateRegister = celebrate({
 
 module.exports.validateUpdateUser = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-  }),
-});
-
-module.exports.validateUserId = celebrate({
-  params: Joi.object().keys({
-    userId: Joi.string().length(24).hex().required(),
+    name: Joi.string().required().min(2).max(30),
+    email: Joi.string().required().email(),
   }),
 });
 
@@ -36,12 +30,17 @@ module.exports.validateFilm = celebrate({
     director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.string().required(),
-    image: Joi.string().required(),
+    image: Joi.string().required().pattern(patternOfLink),
     trailerLink: Joi.string().required().pattern(patternOfLink),
     thumbnail: Joi.string().required().pattern(patternOfLink),
-    owner: Joi.string().length(24).hex().required(),
-    movieId: Joi.string().length(24).hex().required(),
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
+  }),
+});
+
+module.exports.validateFilmId = celebrate({
+  params: Joi.object().keys({
+    movieId: Joi.string().length(24).hex().required(),
   }),
 });

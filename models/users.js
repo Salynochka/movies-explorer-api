@@ -21,10 +21,6 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    validate: {
-      validator: (password) => validator.isPassword(password),
-      message: 'Минимальная длина пароля - 8 знаков',
-    },
     required: [true, 'password - обязательное поле'],
     select: false,
     hash: true,
