@@ -31,7 +31,7 @@ mongoose.connect(bitfilmsdb, {
 
 const allowedCors = [
   'https://movies.weekend.nomoredomainsrocks.ru',
-  'http://localhost:3000/',
+  'http://localhost:3000',
 ];
 
 // подключение допуска запросов с фронта
