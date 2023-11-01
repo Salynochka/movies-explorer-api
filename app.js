@@ -19,13 +19,13 @@ const errorHandler = require('./middlewares/error-handler');
 const routes = require('./routes/index');
 
 // слушаем 3000 порт и ссылку на БД
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, MONGO_URL } = process.env;
 
 // приложение на express
 const app = express();
 
 // подключение к БД
-mongoose.connect(`${process.env.MONGO_URL}`, {
+mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
