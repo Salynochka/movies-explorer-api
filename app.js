@@ -30,10 +30,11 @@ mongoose.connect(bitfilmsdb, {
 });
 
 // подключение допуска запросов с фронта
-app.use(cors({
+app.use(cors());
+/* {
   origin: 'https://movies.weekend.nomoredomainsrocks.ru',
   credentials: true,
-}));
+})); */
 
 // безопасность
 app.use(helmet());
