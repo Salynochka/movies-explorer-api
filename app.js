@@ -18,23 +18,26 @@ const errorHandler = require('./middlewares/error-handler');
 // импорт роута
 const routes = require('./routes/index');
 
-// слушаем 3001 порт и ссылку на БД
-const { PORT = 3000, bitfilmsdb } = process.env;
+// слушаем 3000 порт и ссылку на БД
+const { PORT = 3000 } = process.env;
 
 // приложение на express
 const app = express();
 
 // подключение к БД
-mongoose.connect(bitfilmsdb, {
+mongoose.connect(`${process.env.MONGO_URL}`, {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 // подключение допуска запросов с фронта
-app.use(cors({
-  origin: 'https://movies.weekend.nomoredomainsrocks.ru',
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+app.use(
+  cors({
+    origin: 'https://movies.weekend.nomoredomainsrocks.ru',
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }),
+);
 
 // безопасность
 app.use(helmet());
@@ -58,8 +61,4 @@ app.use(errors());
 // централизованная обработка ошибок
 app.use(errorHandler);
 
-// app.listen(PORT);
-
-app.listen(() => {
-  console.log(`Слушаю ${PORT}`);
-});
+app.listen(PORT);
