@@ -19,13 +19,13 @@ const errorHandler = require('./middlewares/error-handler');
 const routes = require('./routes/index');
 
 // слушаем 3000 порт и ссылку на БД
-const { PORT = 3000, MONGO_URL } = process.env;
+const { PORT = 3000 } = process.env;
 
 // приложение на express
 const app = express();
 
 // подключение к БД
-mongoose.connect(MONGO_URL, {
+mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
