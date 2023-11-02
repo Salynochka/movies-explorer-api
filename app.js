@@ -19,13 +19,13 @@ const errorHandler = require('./middlewares/error-handler');
 const routes = require('./routes/index');
 
 // слушаем 3000 порт и ссылку на БД
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, MONGO_URL } = process.env;
 
 // приложение на express
 const app = express();
 
 // подключение к БД
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
+mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -33,7 +33,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
 // подключение допуска запросов с фронта
 app.use(
   cors({
-    origin: '*', // 'https://movies.weekend.nomoredomainsrocks.ru',
+    origin: 'http://192.168.100.6:3000', //https://movies.weekend.nomoredomainsrocks.ru',
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
   }),
