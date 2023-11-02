@@ -34,7 +34,7 @@ module.exports.register = (req, res, next) => {
   }
 
   bcrypt
-    .hash(password, 10) // записываем данные в базу
+    .hash(req.body.password, 10) // записываем данные в базу
     .then((hash) => User.create({
       name,
       email,
