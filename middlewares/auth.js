@@ -4,17 +4,19 @@ const NotAuthError = require('../errors/not-auth-error');
 const { SECRET_KEY = 'SomeSecretKey123&' } = process.env;
 
 module.exports.auth = (req, res, next) => {
-  const { token } = req.cookies;
+  const { authorization } = req.headers;
 
-  if (!token) {
-    next(new NotAuthError('Необходима авторизация'));
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    return next(new NotAuthError('Необходима авторизация'));
   }
+
+  const token = authorization.replace('Bearer ', '');
   let payload;
 
   try {
     payload = jwt.verify(token, SECRET_KEY); // попытаемся верифицировать токен
   } catch (err) {
-    next(new NotAuthError('Необходима авторизация')); // отправим ошибку, если не получилось
+    throw new NotAuthError('Необходима авторизация'); // отправим ошибку, если не получилось
   }
 
   req.user = payload; // записываем пейлоуд в объект запроса
