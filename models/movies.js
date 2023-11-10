@@ -46,11 +46,6 @@ const movieSchema = new mongoose.Schema({
       message: 'Некорректно переданный URL',
     },
   },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: [true, 'не передан id пользователя'],
-    ref: 'user',
-  },
   movieId: {
     type: Number,
     required: [true, 'не передан id фильма'],
