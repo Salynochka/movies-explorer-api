@@ -29,6 +29,7 @@ module.exports.validateFilm = celebrate({
     country: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().required(),
+    description: Joi.string().required(),
     year: Joi.string().required(),
     image: Joi.string().required().pattern(patternOfLink),
     trailerLink: Joi.string().required().pattern(patternOfLink),
