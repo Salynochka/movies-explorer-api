@@ -27,16 +27,16 @@ module.exports.validateUpdateUser = celebrate({
 module.exports.validateFilm = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
+    description: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().required(),
-    description: Joi.string().required(),
-    year: Joi.string().required(),
     image: Joi.string().required().pattern(patternOfLink),
-    trailerLink: Joi.string().required().pattern(patternOfLink),
-    thumbnail: Joi.string().required().pattern(patternOfLink),
     movieId: Joi.number().required(),
-    nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
+    nameRU: Joi.string().required(),
+    thumbnail: Joi.string().required().pattern(patternOfLink),
+    trailerLink: Joi.string().required().pattern(patternOfLink),
+    year: Joi.string().required(),
   }),
 });
 

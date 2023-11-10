@@ -6,25 +6,42 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: [true, 'страна создания фильма - обязательное поле'],
   },
-  director: {
-    type: String,
-    required: [true, 'режессёр фильма - обязательное поле'],
-  },
   description: {
     type: String,
     required: [true, 'описание фильма - обязательное поле'],
+  },
+  director: {
+    type: String,
+    required: [true, 'режессёр фильма - обязательное поле'],
   },
   duration: {
     type: Number,
     required: [true, 'длительность фильма - обязательное поле'],
   },
-  year: {
-    type: String,
-    required: [true, 'год создания фильма - обязательное поле'],
-  },
   image: {
     type: String,
     required: [true, 'постер к фильму - обязательное поле'],
+    validate: {
+      validator: (url) => validator.isURL(url),
+      message: 'Некорректно переданный URL',
+    },
+  },
+  movieId: {
+    type: Number,
+    required: [true, 'не передан id фильма'],
+    ref: 'movie',
+  },
+  nameEN: {
+    type: String,
+    required: [true, 'название фильма на английском языке - обязательное поле'],
+  },
+  nameRU: {
+    type: String,
+    required: [true, 'название фильма на русском языке - обязательное поле'],
+  },
+  thumbnail: {
+    type: String,
+    required: [true, 'миниатюрное изображение постера фильма - обязательное поле'],
     validate: {
       validator: (url) => validator.isURL(url),
       message: 'Некорректно переданный URL',
@@ -38,26 +55,9 @@ const movieSchema = new mongoose.Schema({
       message: 'Некорректно переданный URL',
     },
   },
-  thumbnail: {
+  year: {
     type: String,
-    required: [true, 'миниатюрное изображение постера фильма - обязательное поле'],
-    validate: {
-      validator: (url) => validator.isURL(url),
-      message: 'Некорректно переданный URL',
-    },
-  },
-  movieId: {
-    type: Number,
-    required: [true, 'не передан id фильма'],
-    ref: 'movie',
-  },
-  nameRU: {
-    type: String,
-    required: [true, 'название фильма на русском языке - обязательное поле'],
-  },
-  nameEN: {
-    type: String,
-    required: [true, 'название фильма на английском языке - обязательное поле'],
+    required: [true, 'год создания фильма - обязательное поле'],
   },
 });
 
