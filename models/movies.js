@@ -10,6 +10,10 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: [true, 'режессёр фильма - обязательное поле'],
   },
+  description: {
+    type: String,
+    required: [true, 'описание фильма - обязательное поле'],
+  },
   duration: {
     type: Number,
     required: [true, 'длительность фильма - обязательное поле'],
