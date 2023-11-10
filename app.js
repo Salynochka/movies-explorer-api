@@ -33,7 +33,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
 // подключение допуска запросов с фронта
 app.use(
   cors({
-    origin: 'http://localhost:3000', // 'https://movies.weekend.nomoredomainsrocks.ru'
+    origin: 'https://movies.weekend.nomoredomainsrocks.ru', // 'http://localhost:3000'
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
   }),
