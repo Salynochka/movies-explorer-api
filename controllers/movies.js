@@ -13,7 +13,7 @@ module.exports.getFilms = (req, res, next) => {
 
 module.exports.createFilm = (req, res, next) => {
   Movie.create({ owner: req.user._id, ...req.body })
-    .then((movie) => res.status(200).send({
+    .then((movie) => res.send({
       data: movie,
     }))
     .catch((err) => {
