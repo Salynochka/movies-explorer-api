@@ -71,10 +71,9 @@ module.exports.getCurrentUser = (req, res, next) => {
 
 module.exports.updateUser = (req, res, next) => {
   const { name, email } = req.body;
-  const userId = req.user._id;
 
   User.findByIdAndUpdate(
-    userId,
+    req.user._id,
     { name, email },
     { new: true, runValidators: true },
   )
