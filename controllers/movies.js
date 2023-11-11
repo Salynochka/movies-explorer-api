@@ -12,31 +12,8 @@ module.exports.getFilms = (req, res, next) => {
 };
 
 module.exports.createFilm = (req, res, next) => {
-  const {
-    country, director,
-    duration, year,
-    description, image,
-    trailer,
-    nameRU, nameEN,
-    thumbnail, movieId,
-  } = req.body;
-  const owner = req.user._id;
-
-  Movie.create({
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailer,
-    nameRU,
-    nameEN,
-    thumbnail,
-    movieId,
-    owner,
-  })
-    .then((movie) => res.send({
+  Movie.create({ owner: req.user._id, ...req.body })
+    .then((movie) => res.status(200).send({
       data: movie,
     }))
     .catch((err) => {
