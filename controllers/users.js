@@ -78,7 +78,7 @@ module.exports.updateUser = (req, res, next) => {
     { name, email },
     { new: true, runValidators: true },
   )
-    .orFail(NotFoundError('Запрашиваемый пользователь не найден'))
+    .orFail(new NotFoundError('Запрашиваемый пользователь не найден'))
     .then((user) => {
       res.send(user);
     })
