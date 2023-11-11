@@ -59,6 +59,11 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: [true, 'год создания фильма - обязательное поле'],
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('movie', movieSchema);
