@@ -34,8 +34,8 @@ module.exports.deleteFilm = (req, res, next) => {
         throw new ForbiddenError('Нельзя удалить чужой фильм');
       } else {
         Movie.deleteOne(movie)
-          .then((deletedMovie) => {
-            res.status(200).send(deletedMovie);
+          .then(() => {
+            res.status(200).send(movie);
           })
           .catch(next);
       }
