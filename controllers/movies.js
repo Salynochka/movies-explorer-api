@@ -26,7 +26,7 @@ module.exports.createFilm = (req, res, next) => {
 };
 
 module.exports.deleteFilm = (req, res, next) => {
-  Movie.findById(req.params.movieId)
+  Movie.findById(req.params._id)
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError('Запрашиваемый фильм не найден');
@@ -34,8 +34,8 @@ module.exports.deleteFilm = (req, res, next) => {
         throw new ForbiddenError('Нельзя удалить чужой фильм');
       } else {
         Movie.deleteOne(movie)
-          .then(() => {
-            res.status(200).send(movie);
+          .then((deletedMovie) => {
+            res.status(200).send(deletedMovie);
           })
           .catch(next);
       }
