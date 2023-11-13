@@ -63,6 +63,6 @@ const movieSchema = new mongoose.Schema({
     ref: 'user',
     required: [true, 'обязательное поле'],
   },
-}, { versionKey: false });
+});
 
 module.exports = mongoose.model('movie', movieSchema);
