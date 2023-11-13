@@ -26,14 +26,14 @@ module.exports.createFilm = (req, res, next) => {
 };
 
 module.exports.deleteFilm = (req, res, next) => {
-  Movie.findById({ _id: req.params.moviesId })
+  Movie.findById({ _id: req.params._id })
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError('Запрашиваемый фильм не найден');
       } else if (movie.owner.toString() !== req.user._id) {
         throw new ForbiddenError('Нельзя удалить чужой фильм');
       } else {
-        Movie.deleteOne({ _id: req.params.moviesId })
+        return Movie.deleteOne({ _id: req.params.moviesId })
           .then(() => {
             res.status(200).send(movie);
           })
