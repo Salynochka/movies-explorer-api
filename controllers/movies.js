@@ -33,7 +33,7 @@ module.exports.deleteFilm = (req, res, next) => {
       } else if (movie.owner.toString() !== req.user._id) {
         throw new ForbiddenError('Нельзя удалить чужой фильм');
       } else {
-        return Movie.deleteOne({ _id: req.params.moviesId })
+        Movie.deleteOne({ _id: req.params.moviesId })
           .then(() => {
             res.status(200).send(movie);
           })
