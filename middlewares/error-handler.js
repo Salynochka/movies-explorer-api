@@ -3,7 +3,7 @@ const errorHandler = (err, req, res, next) => {
 
   const { message } = err;
   res.status(statusCode).send({ message });
-  next();
+  return next();
 };
 
 module.exports = errorHandler;

@@ -26,25 +26,20 @@ module.exports.createFilm = (req, res, next) => {
 };
 
 module.exports.deleteFilm = (req, res, next) => {
-  Movie.findById({ _id: req.params._id })
+  Movie.findById(req.params._id)
     .then((movie) => {
       if (!movie) {
-        throw new NotFoundError('Запрашиваемый фильм не найден');
-      } else if (movie.owner.toString() !== req.user._id) {
-        throw new ForbiddenError('Нельзя удалить чужой фильм');
-      } else {
-        return Movie.deleteOne({ _id: req.params.moviesId })
-          .then(() => {
-            res.status(200).send(movie);
-          })
-          .catch(next);
+        return next(new NotFoundError('Запрашиваемый фильм не найден'));
       }
+      if (movie.owner.toString() !== req.user._id) {
+        return next(new ForbiddenError('Нельзя удалить чужой фильм'));
+      }
+      return Movie.findByIdAndDelete(req.params._id).then(() => res.send(movie));
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new IncorrectDataError('Произошла ошибка'));
-        return;
+        return next(new IncorrectDataError('Произошла ошибка'));
       }
-      next(err);
+      return next(err);
     });
 };
