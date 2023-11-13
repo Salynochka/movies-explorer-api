@@ -29,7 +29,6 @@ const movieSchema = new mongoose.Schema({
   movieId: {
     type: Number,
     required: [true, 'не передан id фильма'],
-    ref: 'movie',
   },
   nameEN: {
     type: String,
@@ -62,8 +61,8 @@ const movieSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
-    required: true,
+    required: [true, 'обязательное поле'],
   },
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model('movie', movieSchema);
