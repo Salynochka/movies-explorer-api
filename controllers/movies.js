@@ -13,9 +13,7 @@ module.exports.getFilms = (req, res, next) => {
 
 module.exports.createFilm = (req, res, next) => {
   Movie.create({ owner: req.user._id, ...req.body })
-    .then((movie) => res.send({
-      data: movie,
-    }))
+    .then((movie) => res.send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new IncorrectDataError('Произошла ошибка'));
