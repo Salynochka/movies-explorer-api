@@ -32,7 +32,7 @@ module.exports.deleteFilm = (req, res, next) => {
       if (movie.owner.toString() !== req.user._id) {
         return next(new ForbiddenError('Нельзя удалить чужой фильм'));
       }
-      return Movie.findByIdAndDelete(req.params._id).then(() => res.send(movie));
+      return Movie.deleteOne(movie).then(() => res.send(movie));
     })
     .catch((err) => {
       if (err.name === 'CastError') {
